@@ -9,16 +9,35 @@
 import UIKit
 
 class GoalTableViewCell: UITableViewCell {
-
+    
+    @IBOutlet weak var goalLabel: UILabel!
+    @IBOutlet weak var goalStepper: UIStepper!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        // Setup Stepper
+        goalStepper.minimumValue = 1
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    
+    func loadCell(numberGoal numberGoal: Int) {
+        goalStepper.value = Double(numberGoal)
+        goalLabel.text = "\(numberGoal)"
+    }
+    
+    
+    // MARK: - IBActions
+    
+    @IBAction func stepperValueChanged(sender: UIStepper) {
+        goalLabel.text = "\(Int(goalStepper.value))"
     }
     
 }

@@ -17,6 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        let dailyViewController = DailyViewController()
+        let dailyViewNavigationController = UINavigationController(rootViewController: dailyViewController)
+        
+        window?.rootViewController = dailyViewNavigationController
+        window?.makeKeyAndVisible()
+        
         return true
     }
 

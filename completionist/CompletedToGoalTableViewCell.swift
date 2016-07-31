@@ -9,16 +9,49 @@
 import UIKit
 
 class CompletedToGoalTableViewCell: UITableViewCell {
-
+    
+    @IBOutlet weak var completedStepper: UIStepper!
+    @IBOutlet weak var goalStepper: UIStepper!
+    @IBOutlet weak var completedLabel: UILabel!
+    @IBOutlet weak var goalLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        // Set stepper minimum values
+        goalStepper.minimumValue = 1.0
+        completedStepper.minimumValue = 0.0
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func loadCell(numberCompleted numberCompleted: Int, numberGoal: Int) {
+        
+        completedStepper.value = Double(numberCompleted)
+        completedLabel.text = "\(numberCompleted)"
+        
+        goalStepper.value = Double(numberGoal)
+        goalLabel.text = "\(numberGoal)"
+    }
+    
+    
+    // MARK: - IBActions
+    
+    @IBAction func completedStepperValueChanged(sender: UIStepper) {
+        
+        // Update Completed Label
+        completedLabel.text = "\(Int(sender.value))"
+    }
+    
+    @IBAction func goalStepperValueChanged(sender: UIStepper) {
+        
+        // Update Goal Label
+        goalLabel.text = "\(Int(sender.value))"
     }
     
 }

@@ -7,23 +7,63 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2012AFEB1D417CAB00F15420 /* NewActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2012AFEA1D417CAB00F15420 /* NewActivityViewController.swift */; };
+		2012AFED1D4183DF00F15420 /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2012AFEC1D4183DF00F15420 /* ActivitiesViewController.swift */; };
+		2012AFF21D4186B200F15420 /* NameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2012AFF01D4186B200F15420 /* NameTableViewCell.swift */; };
+		2012AFF31D4186B200F15420 /* NameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2012AFF11D4186B200F15420 /* NameTableViewCell.xib */; };
+		2012AFF61D4187FB00F15420 /* RequirementsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2012AFF41D4187FB00F15420 /* RequirementsTableViewCell.swift */; };
+		2012AFF71D4187FB00F15420 /* RequirementsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2012AFF51D4187FB00F15420 /* RequirementsTableViewCell.xib */; };
+		2012AFFA1D418B1100F15420 /* GoalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2012AFF81D418B1100F15420 /* GoalTableViewCell.swift */; };
+		2012AFFB1D418B1100F15420 /* GoalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2012AFF91D418B1100F15420 /* GoalTableViewCell.xib */; };
+		2027540E1D46DE8A0004885E /* ActivityCompletionBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2027540D1D46DE8A0004885E /* ActivityCompletionBarView.swift */; };
+		203AFE451D41693900236B43 /* CheckboxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203AFE441D41693900236B43 /* CheckboxButton.swift */; };
+		20449CB51D46AD7800D216B2 /* WeeklyProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20449CB41D46AD7800D216B2 /* WeeklyProgressViewController.swift */; };
 		207360861D404C160009FF44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207360851D404C160009FF44 /* AppDelegate.swift */; };
-		207360881D404C160009FF44 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207360871D404C160009FF44 /* ViewController.swift */; };
-		2073608B1D404C160009FF44 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 207360891D404C160009FF44 /* Main.storyboard */; };
 		2073608E1D404C160009FF44 /* completionist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2073608C1D404C160009FF44 /* completionist.xcdatamodeld */; };
 		207360901D404C160009FF44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2073608F1D404C160009FF44 /* Assets.xcassets */; };
 		207360931D404C160009FF44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 207360911D404C160009FF44 /* LaunchScreen.storyboard */; };
+		2073609B1D4050080009FF44 /* DailyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2073609A1D4050080009FF44 /* DailyViewController.swift */; };
+		207360A01D4078A70009FF44 /* ActivityCheckboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2073609E1D4078A70009FF44 /* ActivityCheckboxTableViewCell.swift */; };
+		207360A11D4078A70009FF44 /* ActivityCheckboxTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2073609F1D4078A70009FF44 /* ActivityCheckboxTableViewCell.xib */; };
+		207360A31D407CF70009FF44 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207360A21D407CF70009FF44 /* Activity.swift */; };
+		20C917961D43D023005D4F30 /* DeleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C917941D43D023005D4F30 /* DeleteTableViewCell.swift */; };
+		20C917971D43D023005D4F30 /* DeleteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20C917951D43D023005D4F30 /* DeleteTableViewCell.xib */; };
+		20C917991D43D2DF005D4F30 /* ActivityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C917981D43D2DF005D4F30 /* ActivityDetailViewController.swift */; };
+		20C9179C1D4479BA005D4F30 /* CompletedToGoalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C9179A1D4479BA005D4F30 /* CompletedToGoalTableViewCell.swift */; };
+		20C9179D1D4479BA005D4F30 /* CompletedToGoalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20C9179B1D4479BA005D4F30 /* CompletedToGoalTableViewCell.xib */; };
+		20C917A01D458D2B005D4F30 /* CompletionBarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C9179E1D458D2B005D4F30 /* CompletionBarTableViewCell.swift */; };
+		20C917A11D458D2B005D4F30 /* CompletionBarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20C9179F1D458D2B005D4F30 /* CompletionBarTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2012AFEA1D417CAB00F15420 /* NewActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewActivityViewController.swift; sourceTree = "<group>"; };
+		2012AFEC1D4183DF00F15420 /* ActivitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
+		2012AFF01D4186B200F15420 /* NameTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameTableViewCell.swift; sourceTree = "<group>"; };
+		2012AFF11D4186B200F15420 /* NameTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NameTableViewCell.xib; sourceTree = "<group>"; };
+		2012AFF41D4187FB00F15420 /* RequirementsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequirementsTableViewCell.swift; sourceTree = "<group>"; };
+		2012AFF51D4187FB00F15420 /* RequirementsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequirementsTableViewCell.xib; sourceTree = "<group>"; };
+		2012AFF81D418B1100F15420 /* GoalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalTableViewCell.swift; sourceTree = "<group>"; };
+		2012AFF91D418B1100F15420 /* GoalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoalTableViewCell.xib; sourceTree = "<group>"; };
+		2027540D1D46DE8A0004885E /* ActivityCompletionBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCompletionBarView.swift; sourceTree = "<group>"; };
+		203AFE441D41693900236B43 /* CheckboxButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckboxButton.swift; sourceTree = "<group>"; };
+		20449CB41D46AD7800D216B2 /* WeeklyProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeeklyProgressViewController.swift; sourceTree = "<group>"; };
 		207360821D404C160009FF44 /* completionist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = completionist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		207360851D404C160009FF44 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		207360871D404C160009FF44 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		2073608A1D404C160009FF44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2073608D1D404C160009FF44 /* completionist.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = completionist.xcdatamodel; sourceTree = "<group>"; };
 		2073608F1D404C160009FF44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		207360921D404C160009FF44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		207360941D404C160009FF44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2073609A1D4050080009FF44 /* DailyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyViewController.swift; sourceTree = "<group>"; };
+		2073609E1D4078A70009FF44 /* ActivityCheckboxTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCheckboxTableViewCell.swift; sourceTree = "<group>"; };
+		2073609F1D4078A70009FF44 /* ActivityCheckboxTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityCheckboxTableViewCell.xib; sourceTree = "<group>"; };
+		207360A21D407CF70009FF44 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		20C917941D43D023005D4F30 /* DeleteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteTableViewCell.swift; sourceTree = "<group>"; };
+		20C917951D43D023005D4F30 /* DeleteTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeleteTableViewCell.xib; sourceTree = "<group>"; };
+		20C917981D43D2DF005D4F30 /* ActivityDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewController.swift; sourceTree = "<group>"; };
+		20C9179A1D4479BA005D4F30 /* CompletedToGoalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletedToGoalTableViewCell.swift; sourceTree = "<group>"; };
+		20C9179B1D4479BA005D4F30 /* CompletedToGoalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompletedToGoalTableViewCell.xib; sourceTree = "<group>"; };
+		20C9179E1D458D2B005D4F30 /* CompletionBarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletionBarTableViewCell.swift; sourceTree = "<group>"; };
+		20C9179F1D458D2B005D4F30 /* CompletionBarTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompletionBarTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +77,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2012AFEE1D41865800F15420 /* custom-cells */ = {
+			isa = PBXGroup;
+			children = (
+				2073609E1D4078A70009FF44 /* ActivityCheckboxTableViewCell.swift */,
+				2073609F1D4078A70009FF44 /* ActivityCheckboxTableViewCell.xib */,
+				2012AFF01D4186B200F15420 /* NameTableViewCell.swift */,
+				2012AFF11D4186B200F15420 /* NameTableViewCell.xib */,
+				2012AFF41D4187FB00F15420 /* RequirementsTableViewCell.swift */,
+				2012AFF51D4187FB00F15420 /* RequirementsTableViewCell.xib */,
+				2012AFF81D418B1100F15420 /* GoalTableViewCell.swift */,
+				2012AFF91D418B1100F15420 /* GoalTableViewCell.xib */,
+				20C917941D43D023005D4F30 /* DeleteTableViewCell.swift */,
+				20C917951D43D023005D4F30 /* DeleteTableViewCell.xib */,
+				20C9179A1D4479BA005D4F30 /* CompletedToGoalTableViewCell.swift */,
+				20C9179B1D4479BA005D4F30 /* CompletedToGoalTableViewCell.xib */,
+				20C9179E1D458D2B005D4F30 /* CompletionBarTableViewCell.swift */,
+				20C9179F1D458D2B005D4F30 /* CompletionBarTableViewCell.xib */,
+			);
+			name = "custom-cells";
+			sourceTree = "<group>";
+		};
+		2012AFEF1D41866A00F15420 /* view-controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2073609A1D4050080009FF44 /* DailyViewController.swift */,
+				20449CB41D46AD7800D216B2 /* WeeklyProgressViewController.swift */,
+				2012AFEC1D4183DF00F15420 /* ActivitiesViewController.swift */,
+				20C917981D43D2DF005D4F30 /* ActivityDetailViewController.swift */,
+				2012AFEA1D417CAB00F15420 /* NewActivityViewController.swift */,
+			);
+			name = "view-controllers";
+			sourceTree = "<group>";
+		};
 		207360791D404C160009FF44 = {
 			isa = PBXGroup;
 			children = (
@@ -57,8 +130,11 @@
 			isa = PBXGroup;
 			children = (
 				207360851D404C160009FF44 /* AppDelegate.swift */,
-				207360871D404C160009FF44 /* ViewController.swift */,
-				207360891D404C160009FF44 /* Main.storyboard */,
+				2012AFEF1D41866A00F15420 /* view-controllers */,
+				207360A21D407CF70009FF44 /* Activity.swift */,
+				203AFE441D41693900236B43 /* CheckboxButton.swift */,
+				2027540D1D46DE8A0004885E /* ActivityCompletionBarView.swift */,
+				2012AFEE1D41865800F15420 /* custom-cells */,
 				2073608F1D404C160009FF44 /* Assets.xcassets */,
 				207360911D404C160009FF44 /* LaunchScreen.storyboard */,
 				207360941D404C160009FF44 /* Info.plist */,
@@ -125,9 +201,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2012AFFB1D418B1100F15420 /* GoalTableViewCell.xib in Resources */,
 				207360931D404C160009FF44 /* LaunchScreen.storyboard in Resources */,
+				20C9179D1D4479BA005D4F30 /* CompletedToGoalTableViewCell.xib in Resources */,
+				2012AFF71D4187FB00F15420 /* RequirementsTableViewCell.xib in Resources */,
 				207360901D404C160009FF44 /* Assets.xcassets in Resources */,
-				2073608B1D404C160009FF44 /* Main.storyboard in Resources */,
+				20C917A11D458D2B005D4F30 /* CompletionBarTableViewCell.xib in Resources */,
+				207360A11D4078A70009FF44 /* ActivityCheckboxTableViewCell.xib in Resources */,
+				20C917971D43D023005D4F30 /* DeleteTableViewCell.xib in Resources */,
+				2012AFF31D4186B200F15420 /* NameTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +220,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				207360881D404C160009FF44 /* ViewController.swift in Sources */,
+				207360A31D407CF70009FF44 /* Activity.swift in Sources */,
 				2073608E1D404C160009FF44 /* completionist.xcdatamodeld in Sources */,
+				207360A01D4078A70009FF44 /* ActivityCheckboxTableViewCell.swift in Sources */,
+				2027540E1D46DE8A0004885E /* ActivityCompletionBarView.swift in Sources */,
+				2012AFEB1D417CAB00F15420 /* NewActivityViewController.swift in Sources */,
 				207360861D404C160009FF44 /* AppDelegate.swift in Sources */,
+				2012AFFA1D418B1100F15420 /* GoalTableViewCell.swift in Sources */,
+				20C917A01D458D2B005D4F30 /* CompletionBarTableViewCell.swift in Sources */,
+				2012AFED1D4183DF00F15420 /* ActivitiesViewController.swift in Sources */,
+				20C9179C1D4479BA005D4F30 /* CompletedToGoalTableViewCell.swift in Sources */,
+				2012AFF21D4186B200F15420 /* NameTableViewCell.swift in Sources */,
+				20449CB51D46AD7800D216B2 /* WeeklyProgressViewController.swift in Sources */,
+				203AFE451D41693900236B43 /* CheckboxButton.swift in Sources */,
+				2073609B1D4050080009FF44 /* DailyViewController.swift in Sources */,
+				20C917991D43D2DF005D4F30 /* ActivityDetailViewController.swift in Sources */,
+				20C917961D43D023005D4F30 /* DeleteTableViewCell.swift in Sources */,
+				2012AFF61D4187FB00F15420 /* RequirementsTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		207360891D404C160009FF44 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2073608A1D404C160009FF44 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		207360911D404C160009FF44 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -254,6 +342,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = completionist/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brandonwalker.completionist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -265,6 +354,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = completionist/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brandonwalker.completionist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -290,6 +380,7 @@
 				207360991D404C160009FF44 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

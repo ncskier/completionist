@@ -8,8 +8,14 @@
 
 import UIKit
 
-class DeleteTableViewCell: UITableViewCell {
+protocol DeleteTableViewCellDelegate {
+    func deleteTableViewCellTapped(deleteTableViewCell deleteTableViewCell: DeleteTableViewCell)
+}
 
+class DeleteTableViewCell: UITableViewCell {
+    
+    var delegate: DeleteTableViewCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,6 +25,17 @@ class DeleteTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    
+    // MARK: - IBActions
+    
+    @IBAction func deleteButtonTapped(sender: UIButton) {
+        
+        if (delegate != nil) {
+            delegate!.deleteTableViewCellTapped(deleteTableViewCell: self)
+        }
+        
     }
     
 }

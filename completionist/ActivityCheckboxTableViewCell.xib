@@ -1,18 +1,89 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ActivityCheckboxTableViewCell" customModule="completionist" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ActivityCheckboxTableViewCell" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" editingAccessoryType="disclosureIndicator" rowHeight="100" id="KGk-i7-Jjw" customClass="ActivityCheckboxTableViewCell" customModule="completionist" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10/10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SjR-Xo-itv">
+                        <rect key="frame" x="256" y="39" width="44" height="22"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Requirements" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="tve-WF-hkT">
+                        <rect key="frame" x="58" y="32" width="190" height="59.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="esx-sm-TYn" customClass="CheckboxButton" customModule="completionist" customModuleProvider="target">
+                        <rect key="frame" x="16" y="33" width="34" height="34"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="34" id="K5Z-Ox-XBh"/>
+                            <constraint firstAttribute="width" constant="34" id="VxT-Ua-Rmg"/>
+                        </constraints>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rkf-Oa-0q7">
+                        <rect key="frame" x="58" y="8" width="244" height="24"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bra-iX-T9V">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
+                        <connections>
+                            <action selector="cellSelectButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="VhB-jd-Wqw"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="bra-iX-T9V" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="50Y-q5-1Nr"/>
+                    <constraint firstItem="rkf-Oa-0q7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="7iq-ll-baN"/>
+                    <constraint firstItem="bra-iX-T9V" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="8zw-Q4-mZq"/>
+                    <constraint firstItem="esx-sm-TYn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="9Ck-E1-jRF"/>
+                    <constraint firstItem="SjR-Xo-itv" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-12" id="DDr-pp-Kxa"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="bra-iX-T9V" secondAttribute="bottom" constant="-7.5" id="GhA-na-Cnc"/>
+                    <constraint firstItem="esx-sm-TYn" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="HZL-Pv-kkq"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="tve-WF-hkT" secondAttribute="bottom" constant="4" id="LMP-Lw-aw0"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="bra-iX-T9V" secondAttribute="trailing" constant="-8" id="RhG-OA-xyc"/>
+                    <constraint firstItem="SjR-Xo-itv" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Tbn-L4-h5M"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="tve-WF-hkT" secondAttribute="trailing" constant="65" id="YMc-Id-aRn"/>
+                    <constraint firstItem="tve-WF-hkT" firstAttribute="leading" secondItem="rkf-Oa-0q7" secondAttribute="leading" id="bye-3v-7LL"/>
+                    <constraint firstItem="tve-WF-hkT" firstAttribute="top" secondItem="rkf-Oa-0q7" secondAttribute="bottom" id="fpx-jL-2wc"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="tve-WF-hkT" secondAttribute="trailing" constant="64" id="iCD-H5-Do2"/>
+                    <constraint firstItem="tve-WF-hkT" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="iM5-i8-gH4"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="tve-WF-hkT" secondAttribute="trailing" constant="60" id="lsb-dF-yzp"/>
+                    <constraint firstItem="tve-WF-hkT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="50" id="pym-sL-4PR"/>
+                    <constraint firstItem="rkf-Oa-0q7" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-10" id="u4I-A5-KVc"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="LMP-Lw-aw0"/>
+                        <exclude reference="YMc-Id-aRn"/>
+                        <exclude reference="lsb-dF-yzp"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="cellSelectButton" destination="bra-iX-T9V" id="3Of-Dt-5QI"/>
+                <outlet property="checkboxButton" destination="esx-sm-TYn" id="VRM-aT-zic"/>
+                <outlet property="goalLabel" destination="SjR-Xo-itv" id="6G9-gw-CH3"/>
+                <outlet property="nameLabel" destination="rkf-Oa-0q7" id="htG-hC-rF6"/>
+                <outlet property="requirementsTextView" destination="tve-WF-hkT" id="82B-Va-eIX"/>
+            </connections>
+            <point key="canvasLocation" x="353" y="383"/>
         </tableViewCell>
     </objects>
 </document>
