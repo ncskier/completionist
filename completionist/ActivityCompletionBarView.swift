@@ -13,8 +13,15 @@ class ActivityCompletionBarView: UIView {
     var progress: Float = 0.0
     var completionView =  UIView()
     var gradientLayer = CAGradientLayer()
+    var cornerRadius: CGFloat = 5.0
+    
+    var grayBackgroundColor = UIColor(red: 0.900, green: 0.900, blue: 0.900, alpha: 1.000)
     
     func setupView() {
+        // Outline
+        layer.borderWidth = 0.3
+        layer.cornerRadius = cornerRadius
+        
         // Background
         backgroundColor = UIColor(red: 0.900, green: 0.900, blue: 0.900, alpha: 1.000)
         backgroundColor = UIColor.whiteColor()
@@ -29,7 +36,7 @@ class ActivityCompletionBarView: UIView {
         
         
         // Gradient
-        gradientLayer.cornerRadius = 5.5
+//        gradientLayer.cornerRadius = 5.5
         updateGradientLayer()
         let color1 = UIColor(red: 0.035, green: 0.781, blue: 0.004, alpha: 1.000).CGColor as CGColorRef
 //        let color1 = UIColor(red: 0.036, green: 0.799, blue: 0.004, alpha: 1.000).CGColor as CGColorRef
@@ -101,6 +108,11 @@ class ActivityCompletionBarView: UIView {
     // An empty implementation adversely affects performance during animation.
     override func drawRect(rect: CGRect) {
         // Drawing code
+        
+        // Draw White Background
+        let backgroundPath = UIBezierPath(rect: rect)
+        UIColor.whiteColor().setFill()
+        backgroundPath.fill()
         
         let grayTone: CGFloat = 0.985
         let strokeColor = UIColor(red: grayTone, green: grayTone, blue: grayTone, alpha: 1.000)

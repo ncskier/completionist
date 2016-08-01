@@ -46,6 +46,7 @@ class NewActivityViewController: UIViewController, UITableViewDataSource, UITabl
         tableView = UITableView(frame: view.frame, style: .Grouped)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.allowsSelection = false
         view.addSubview(tableView)
         
         // Register Nibs

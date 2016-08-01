@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class DailyViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NewActivityViewControllerDelegate, ActivityCheckboxTableViewCellDelegate, ActivityDetailViewControllerDelegate {
+class DailyViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NewActivityViewControllerDelegate, ActivityDetailViewControllerDelegate, ActivityCompletionTableViewCellDelegate {
 
 //    @IBOutlet weak var tableView: UITableView!
     var tableView: UITableView!
@@ -20,7 +20,7 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
     var doneBarButton: UIBarButtonItem!
     
     let lastResetDateIdentifier = "lastResetDate"
-    let activityCellIdentifier = "ActivityCheckboxTableViewCell"
+    let activityCompletionCellIdentifier = "ActivityCompletionTableViewCell"
     var activityList = [NSManagedObject]()
     
     
@@ -53,8 +53,8 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
         view.addSubview(tableView)
         
         // Register nib
-        let nib = UINib(nibName: activityCellIdentifier, bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: activityCellIdentifier)
+        let activityCompletionNib = UINib(nibName: activityCompletionCellIdentifier, bundle: nil)
+        tableView.registerNib(activityCompletionNib, forCellReuseIdentifier: activityCompletionCellIdentifier)
         
         // Add Bar Buttons
         addBarButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(addButtonTapped(_:)))
@@ -89,16 +89,17 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
             defaults.setValue(todayDate, forKey: lastResetDateIdentifier)
         } else {
             // Check if it's a new week since last reset date
-            
-            print("lastResetDate: \(lastResetDate!)")
-            print("today: \(todayDate)")
-            
             if ( newWeekSince(lastResetDate!) ) {
                 
                 resetActivities()
                 defaults.setValue(todayDate, forKey: lastResetDateIdentifier)
             }
         }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        animateReloadCompletionCells()
     }
 
     override func didReceiveMemoryWarning() {
@@ -107,12 +108,26 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     
+    func animateReloadCompletionCells() {
+        // Animate loading completion cells
+        for i in 0..<activityList.count {
+            // Important Vars
+            let activity = activityList[i]
+            let indexPath = NSIndexPath(forItem: i, inSection: 0)
+            let cell: ActivityCompletionTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as! ActivityCompletionTableViewCell
+            
+            // Load Completion Bar
+            let progress: Float = Float(activity.valueForKey("numberCompleted") as! Int) / Float(activity.valueForKey("numberGoal") as! Int)
+            cell.loadCompletionBar(progress)
+        }
+    }
+    
+    
     // Week starts on Monday
     func newWeekSince(lastDate: NSDate) -> Bool {
         
         let calendar = NSCalendar.currentCalendar()
         let normalizedToday = getNormalizedToday()
-        print("normalizedToday: \(normalizedToday)")
         
         var todayWeekday = calendar.component(.Weekday, fromDate: normalizedToday) - 1
         // Start week at Monday
@@ -121,18 +136,9 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         
         let difference = calendar.components(.Day, fromDate: lastDate, toDate: normalizedToday, options: [])
-        
-        print("difference.day: \(difference.day)")
-        print("todayWeekday: \(todayWeekday)")
-        
         let newWeekEquation = difference.day + (7 - todayWeekday)   // New Week if >= 7
         
-        print("New Week Equation: \(newWeekEquation)")
-        
         if ( newWeekEquation >= 7) {
-            
-            print("newWeek!!!!")
-            
             return true
         }
         
@@ -168,17 +174,17 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
+        return 97
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // Get Cell
-        let cell: ActivityCheckboxTableViewCell = tableView.dequeueReusableCellWithIdentifier(activityCellIdentifier) as! ActivityCheckboxTableViewCell
+        let cell: ActivityCompletionTableViewCell = tableView.dequeueReusableCellWithIdentifier(activityCompletionCellIdentifier) as! ActivityCompletionTableViewCell
         
         // Load Cell
         let activity = activityList[indexPath.row]
-//        cell.loadCell(name: activity.name, requirements: activity.requirements, goalText: activity.goalText() )
-        cell.loadCell(name: activity.valueForKey("name") as! String, requirements: activity.valueForKey("requirements") as! String, numberCompleted: activity.valueForKey("numberCompleted") as! Int, numberGoal: activity.valueForKey("numberGoal") as! Int, delegate: self)
+        let name = activity.valueForKey("name") as! String
+        cell.loadCell(name: name, delegate: self)
         
         // Return Cell
         return cell
@@ -218,23 +224,27 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     
     
-    // MARK: - ActivityCheckboxTableViewCell Delegate
+    // MARK: - ActivityCompletionTableViewCell Delegate
     
-    func activityCheckboxTableViewCellSelectedForDetailEdit(activityCheckboxTableViewCell: ActivityCheckboxTableViewCell) {
+    func activityCompletionTableViewCellSelected(activityCompletionTableViewCell cell: ActivityCompletionTableViewCell) {
         
-        let index = tableView.indexPathForCell(activityCheckboxTableViewCell)!.row
-        
-        // Create ActivityDetailViewController
-        let activityDetailViewController = ActivityDetailViewController()
-        activityDetailViewController.activityManagedObject = activityList[index]
-        activityDetailViewController.delegate = self
-        activityDetailViewController.activityIndex = index
-        
-        navigationController?.pushViewController(activityDetailViewController, animated: true)
-        
-//        let detailNavigationController = UINavigationController(rootViewController: activityDetailViewController)
-//        presentViewController(detailNavigationController, animated: true, completion: nil)
-        
+        if (tableView.editing) {
+            
+            let index = tableView.indexPathForCell(cell)!.row
+            
+            // Create ActivityDetailViewController
+            let activityDetailViewController = ActivityDetailViewController()
+            activityDetailViewController.activityManagedObject = activityList[index]
+            activityDetailViewController.delegate = self
+            activityDetailViewController.activityIndex = index
+            
+            navigationController?.pushViewController(activityDetailViewController, animated: true)
+            
+        } else {
+            
+            cell.setSelected(!cell.selected, animated: false)
+            
+        }
     }
     
     
@@ -343,11 +353,11 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         navigationItem.leftBarButtonItem = doneBarButton
         
-        // Deselect all rows
-        for i in 0..<activityList.count {
-            let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0)) as! ActivityCheckboxTableViewCell
-            cell.deselectCell()
-        }
+        // WARNING: Deselect all rows
+//        for i in 0..<activityList.count {
+//            let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0)) as! ActivityCompletionTableViewCell
+//            cell.deselectCell()
+//        }
     }
     
     func doneButtonTapped(sender: UIBarButtonItem) {
@@ -372,8 +382,6 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
         }
         
-        print("selected rows: \(selectedRows)")
-        
         if (!selectedRows.isEmpty) {
             
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -384,8 +392,6 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
                 let activityManagedObject = activityList[indexPath.row]
                 let numberCompleted = activityManagedObject.valueForKey("numberCompleted") as! Int
                 activityManagedObject.setValue(numberCompleted + 1, forKey: "numberCompleted")
-                
-                print("numCompleted: \(activityManagedObject.valueForKey("numberCompleted"))")
             }
             
             do {
@@ -399,16 +405,18 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
             
             tableView.reloadData()
             
+            animateReloadCompletionCells()
+            
         }
         
         // Show new view controller
         
-        let weeklyProgressViewController = WeeklyProgressViewController()
-        weeklyProgressViewController.activityList = activityList
+//        let weeklyProgressViewController = WeeklyProgressViewController()
+//        weeklyProgressViewController.activityList = activityList
         
-        let weeklyNavigationController = UINavigationController(rootViewController: weeklyProgressViewController)
+//        let weeklyNavigationController = UINavigationController(rootViewController: weeklyProgressViewController)
         
-        presentViewController(weeklyNavigationController, animated: true, completion: nil)
+//        presentViewController(weeklyNavigationController, animated: true, completion: nil)
     }
 
 
