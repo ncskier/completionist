@@ -16,24 +16,24 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KSW-CZ-hbo" customClass="ActivityCompletionBarView" customModule="completionist" customModuleProvider="target">
-                        <rect key="frame" x="16" y="42.5" width="288" height="40"/>
+                        <rect key="frame" x="16" y="47" width="288" height="30"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="40" id="2cO-6F-NXy"/>
+                            <constraint firstAttribute="height" constant="30" id="2cO-6F-NXy"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Run" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JHh-le-5Xx">
-                        <rect key="frame" x="16" y="14" width="288" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uVo-XX-zgG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="96.5"/>
                         <connections>
                             <action selector="cellSelectButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="G3L-1O-DBa"/>
                         </connections>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Run" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JHh-le-5Xx">
+                        <rect key="frame" x="16" y="19" width="30" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="uVo-XX-zgG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="2He-Nm-3Mh"/>
@@ -41,17 +41,20 @@
                     <constraint firstAttribute="bottomMargin" secondItem="uVo-XX-zgG" secondAttribute="bottom" constant="-8" id="MZe-aA-VW5"/>
                     <constraint firstItem="JHh-le-5Xx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="Mfs-ke-2hI"/>
                     <constraint firstItem="KSW-CZ-hbo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="QQX-VE-peD"/>
+                    <constraint firstItem="KSW-CZ-hbo" firstAttribute="leading" secondItem="JHh-le-5Xx" secondAttribute="leading" id="SVf-op-1Dr"/>
                     <constraint firstItem="JHh-le-5Xx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="U3j-1D-46M"/>
                     <constraint firstAttribute="bottomMargin" secondItem="KSW-CZ-hbo" secondAttribute="bottom" constant="2" id="Vkm-Wt-fZQ"/>
                     <constraint firstItem="KSW-CZ-hbo" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-8" id="XUs-AM-D8o"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="KSW-CZ-hbo" secondAttribute="bottom" constant="6" id="aa3-iq-Pkr"/>
-                    <constraint firstItem="JHh-le-5Xx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="hMl-tL-4r6"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="KSW-CZ-hbo" secondAttribute="bottom" constant="11" id="aa3-iq-Pkr"/>
+                    <constraint firstItem="JHh-le-5Xx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="11" id="hMl-tL-4r6"/>
                     <constraint firstAttribute="trailingMargin" secondItem="uVo-XX-zgG" secondAttribute="trailing" constant="-8" id="jfG-gH-vnp"/>
                     <constraint firstItem="JHh-le-5Xx" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-8" id="yGL-Zf-TB1"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
                         <exclude reference="Mfs-ke-2hI"/>
+                        <exclude reference="U3j-1D-46M"/>
+                        <exclude reference="yGL-Zf-TB1"/>
                         <exclude reference="Vkm-Wt-fZQ"/>
                     </mask>
                 </variation>

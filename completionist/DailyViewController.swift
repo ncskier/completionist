@@ -116,8 +116,13 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
             let indexPath = NSIndexPath(forItem: i, inSection: 0)
             let cell: ActivityCompletionTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as! ActivityCompletionTableViewCell
             
+            // Load Completion Label
+            let numberCompleted = activity.valueForKey("numberCompleted") as! Int
+            let numberGoal = activity.valueForKey("numberGoal") as! Int
+            cell.loadCompletionLabel(numberCompleted: numberCompleted, numberGoal: numberGoal)
+            
             // Load Completion Bar
-            let progress: Float = Float(activity.valueForKey("numberCompleted") as! Int) / Float(activity.valueForKey("numberGoal") as! Int)
+            let progress: Float = Float(numberCompleted) / Float(numberGoal)
             cell.loadCompletionBar(progress)
         }
     }
@@ -184,7 +189,9 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
         // Load Cell
         let activity = activityList[indexPath.row]
         let name = activity.valueForKey("name") as! String
-        cell.loadCell(name: name, delegate: self)
+        let numberCompleted = activity.valueForKey("numberCompleted") as! Int
+        let numberGoal = activity.valueForKey("numberGoal") as! Int
+        cell.loadCell(name: name, numberCompleted: numberCompleted, numberGoal: numberGoal, delegate: self)
         
         // Return Cell
         return cell

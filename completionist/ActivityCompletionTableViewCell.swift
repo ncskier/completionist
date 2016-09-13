@@ -42,19 +42,31 @@ class ActivityCompletionTableViewCell: UITableViewCell {
         
     }
     
-    func loadCell(name name: String, delegate: ActivityCompletionTableViewCellDelegate) {
+    func loadCell(name name: String, numberCompleted: Int, numberGoal: Int, delegate: ActivityCompletionTableViewCellDelegate) {
         
         // Name
         nameLabel.text = name
+        
+        // Completion Label
+        completionBarView.setCompletionLabelText("\(numberCompleted)/\(numberGoal)")
+//        if (numberCompleted >= numberGoal) {
+//            completionLabel.textColor = UIColor(red: 0.041, green: 0.920, blue: 0.000, alpha: 1.00)
+//        } else {
+//            completionLabel.textColor = UIColor.lightGrayColor()
+//        }
         
         // Delegate
         self.delegate = delegate
     }
     
+    func loadCompletionLabel(numberCompleted numberCompleted: Int, numberGoal: Int) {
+        
+        completionBarView.setCompletionLabelText("\(numberCompleted)/\(numberGoal)")
+    }
+    
     func loadCompletionBar(progress: Float) {
         
         completionBarView.setProgress(progress, animated: true)
-        
     }
     
     

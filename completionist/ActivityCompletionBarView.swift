@@ -12,6 +12,7 @@ class ActivityCompletionBarView: UIView {
     
     var progress: Float = 0.0
     var completionView =  UIView()
+    var completionLabel = UILabel()
     var gradientLayer = CAGradientLayer()
     var cornerRadius: CGFloat = 5.0
     
@@ -21,12 +22,17 @@ class ActivityCompletionBarView: UIView {
         // Outline
         layer.borderWidth = 0.3
         layer.cornerRadius = cornerRadius
+        layer.borderColor = UIColor.grayColor().CGColor
         
         // Background
         backgroundColor = UIColor(red: 0.900, green: 0.900, blue: 0.900, alpha: 1.000)
         backgroundColor = UIColor.whiteColor()
 //        backgroundColor = UIColor(red: 0.980, green: 0.980, blue: 0.980, alpha: 1.000)
 //        backgroundColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1.0)
+        
+        // Completion Label
+        completionLabel.textAlignment = .Right
+        addSubview(completionLabel)
         
         // Completion View
         completionView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 0.0, height: frame.height))
@@ -47,6 +53,20 @@ class ActivityCompletionBarView: UIView {
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
         completionView.layer.addSublayer(gradientLayer)
+    }
+    
+    
+    func setCompletionLabelText(text: String) {
+        completionLabel.text = text
+        
+        // For some reason, self view width is wonky during setupView()
+        let completionLabelRightOffset: CGFloat = 8.0
+        completionLabel.frame = CGRect(
+            x: 0.0,
+            y: 0.0,
+            width: frame.width-completionLabelRightOffset,
+            height: frame.height)
+        completionLabel.textColor = UIColor.lightGrayColor()
     }
     
     
@@ -84,7 +104,7 @@ class ActivityCompletionBarView: UIView {
         
         // Update Completion View
         if (animated) {
-            UIView.animateWithDuration(1.0, animations: {
+            UIView.animateWithDuration(0.9, animations: {
                 
                 self.updateCompletionView()
                 
