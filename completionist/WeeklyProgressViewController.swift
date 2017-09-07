@@ -26,7 +26,7 @@ class WeeklyProgressViewController: UIViewController, UITableViewDataSource, UIT
         // Do any additional setup after loading the view.
         
         // Set up tableView
-        tableView = UITableView(frame: view.frame, style: .Grouped)
+        tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.frame = view.frame
@@ -35,23 +35,23 @@ class WeeklyProgressViewController: UIViewController, UITableViewDataSource, UIT
         
         // Register Nibs
         let completionBarNib = UINib(nibName: completionBarCellIdentifier, bundle: nil)
-        tableView.registerNib(completionBarNib, forCellReuseIdentifier: completionBarCellIdentifier)
+        tableView.register(completionBarNib, forCellReuseIdentifier: completionBarCellIdentifier)
         
         // Title
         title = "Weekly Progress"
         
         // Set up Bar Buttons
-        doneBarButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(cancelButtonTapped(_:)))
+        doneBarButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(cancelButtonTapped(_:)))
         navigationItem.leftBarButtonItem = doneBarButton
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         // Load Cells
         for i in 0 ..< activityList.count {
-            let indexPath = NSIndexPath(forRow: 0, inSection: i)
-            let cell = tableView.cellForRowAtIndexPath(indexPath) as! CompletionBarTableViewCell
+            let indexPath = IndexPath(row: 0, section: i)
+            let cell = tableView.cellForRow(at: indexPath) as! CompletionBarTableViewCell
             let activity = activityList[i]
-            let percentCompleted: Float = Float(activity.valueForKey("numberCompleted") as! Int) / Float(activity.valueForKey("numberGoal") as! Int)
+            let percentCompleted: Float = Float(activity.value(forKey: "numberCompleted") as! Int) / Float(activity.value(forKey: "numberGoal") as! Int)
             cell.loadCell(percentCompleted)
         }
     }
@@ -64,27 +64,27 @@ class WeeklyProgressViewController: UIViewController, UITableViewDataSource, UIT
 
 
     // MARK: - TableView Data Source
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return activityList.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let activity = activityList[section]
         
-        return activity.valueForKey("name") as? String
+        return activity.value(forKey: "name") as? String
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 40
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(completionBarCellIdentifier) as! CompletionBarTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: completionBarCellIdentifier) as! CompletionBarTableViewCell
         
         return cell
     }
@@ -97,9 +97,9 @@ class WeeklyProgressViewController: UIViewController, UITableViewDataSource, UIT
     
     // MARK: - Button Actions
     
-    func cancelButtonTapped(sender: UIBarButtonItem) {
+    func cancelButtonTapped(_ sender: UIBarButtonItem) {
         
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     

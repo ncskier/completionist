@@ -21,14 +21,14 @@ class GoalTableViewCell: UITableViewCell {
         goalStepper.minimumValue = 1
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
     
-    func loadCell(numberGoal numberGoal: Int) {
+    func loadCell(numberGoal: Int) {
         goalStepper.value = Double(numberGoal)
         goalLabel.text = "\(numberGoal)"
     }
@@ -36,7 +36,7 @@ class GoalTableViewCell: UITableViewCell {
     
     // MARK: - IBActions
     
-    @IBAction func stepperValueChanged(sender: UIStepper) {
+    @IBAction func stepperValueChanged(_ sender: UIStepper) {
         goalLabel.text = "\(Int(goalStepper.value))"
     }
     

@@ -35,14 +35,14 @@ class ActivityCompletionTableViewCell: UITableViewCell {
         self.selectedBackgroundView = selectedBackgroundView
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
         
     }
     
-    func loadCell(name name: String, numberCompleted: Int, numberGoal: Int, delegate: ActivityCompletionTableViewCellDelegate) {
+    func loadCell(name: String, numberCompleted: Int, numberGoal: Int, delegate: ActivityCompletionTableViewCellDelegate) {
         
         // Name
         nameLabel.text = name
@@ -59,20 +59,20 @@ class ActivityCompletionTableViewCell: UITableViewCell {
         self.delegate = delegate
     }
     
-    func loadCompletionLabel(numberCompleted numberCompleted: Int, numberGoal: Int) {
+    func loadCompletionLabel(numberCompleted: Int, numberGoal: Int) {
         
         completionBarView.setCompletionLabelText("\(numberCompleted)/\(numberGoal)")
     }
     
-    func loadCompletionBar(progress: Float) {
+    func loadCompletionBar(_ progress: Float) {
         
         completionBarView.setProgress(progress, animated: true)
     }
     
     
-    @IBAction func cellSelectButtonTapped(sender: UIButton) {
+    @IBAction func cellSelectButtonTapped(_ sender: UIButton) {
         
-        if (editing) {
+        if (isEditing) {
             // Edit Cell
             selectedBackgroundView?.backgroundColor = grayBackgroundColor
             if (delegate != nil) {

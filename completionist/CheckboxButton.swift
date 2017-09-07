@@ -11,11 +11,11 @@ import UIKit
 class CheckboxButton: UIButton {
     
     let circleColor: UIColor = UIColor(red: 0.041, green: 0.920, blue: 0.000, alpha: 1.00)
-    let checkColor: UIColor = UIColor.whiteColor()
+    let checkColor: UIColor = UIColor.white
     
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         // Drawing code
         
         // Draw Circle
@@ -23,7 +23,7 @@ class CheckboxButton: UIButton {
         let circleDiameter: CGFloat = frame.width - 2*circleLineWidth
         let circleBoundingRect: CGRect = CGRect(x: rect.midX-circleDiameter/2, y: rect.midY-circleDiameter/2, width: circleDiameter, height: circleDiameter)
         
-        let circlePath = UIBezierPath(ovalInRect: circleBoundingRect)
+        let circlePath = UIBezierPath(ovalIn: circleBoundingRect)
         circlePath.lineWidth = circleLineWidth
         
         // Set stroke color
@@ -33,21 +33,21 @@ class CheckboxButton: UIButton {
         circlePath.stroke()
         
         // Draw Checkmark
-        if (state == UIControlState.Selected) {
+        if (state == UIControlState.selected) {
             let checkmarkLineWidth: CGFloat = circleLineWidth
             
             let checkmarkPath = UIBezierPath()
             checkmarkPath.lineWidth = checkmarkLineWidth
             
-            checkmarkPath.moveToPoint(CGPoint(
+            checkmarkPath.move(to: CGPoint(
                 x: circleBoundingRect.minX + circleDiameter/4,
                 y: circleBoundingRect.minY + circleDiameter*(7/12)))
             
-            checkmarkPath.addLineToPoint(CGPoint(
+            checkmarkPath.addLine(to: CGPoint(
                 x: circleBoundingRect.minX + circleDiameter/2,
                 y: circleBoundingRect.minY + circleDiameter*(3/4)))
             
-            checkmarkPath.addLineToPoint(CGPoint(
+            checkmarkPath.addLine(to: CGPoint(
                 x: circleBoundingRect.minX + circleDiameter*(3/4),
                 y: circleBoundingRect.minY + circleDiameter*(1/4)))
             

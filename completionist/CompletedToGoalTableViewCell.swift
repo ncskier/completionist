@@ -24,13 +24,13 @@ class CompletedToGoalTableViewCell: UITableViewCell {
         completedStepper.minimumValue = 0.0
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
-    func loadCell(numberCompleted numberCompleted: Int, numberGoal: Int) {
+    func loadCell(numberCompleted: Int, numberGoal: Int) {
         
         completedStepper.value = Double(numberCompleted)
         completedLabel.text = "\(numberCompleted)"
@@ -42,13 +42,13 @@ class CompletedToGoalTableViewCell: UITableViewCell {
     
     // MARK: - IBActions
     
-    @IBAction func completedStepperValueChanged(sender: UIStepper) {
+    @IBAction func completedStepperValueChanged(_ sender: UIStepper) {
         
         // Update Completed Label
         completedLabel.text = "\(Int(sender.value))"
     }
     
-    @IBAction func goalStepperValueChanged(sender: UIStepper) {
+    @IBAction func goalStepperValueChanged(_ sender: UIStepper) {
         
         // Update Goal Label
         goalLabel.text = "\(Int(sender.value))"

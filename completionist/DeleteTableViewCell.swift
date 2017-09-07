@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DeleteTableViewCellDelegate {
-    func deleteTableViewCellTapped(deleteTableViewCell deleteTableViewCell: DeleteTableViewCell)
+    func deleteTableViewCellTapped(deleteTableViewCell: DeleteTableViewCell)
 }
 
 class DeleteTableViewCell: UITableViewCell {
@@ -21,7 +21,7 @@ class DeleteTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
@@ -30,7 +30,7 @@ class DeleteTableViewCell: UITableViewCell {
     
     // MARK: - IBActions
     
-    @IBAction func deleteButtonTapped(sender: UIButton) {
+    @IBAction func deleteButtonTapped(_ sender: UIButton) {
         
         if (delegate != nil) {
             delegate!.deleteTableViewCellTapped(deleteTableViewCell: self)

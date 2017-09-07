@@ -43,7 +43,7 @@ class NewActivityViewController: UIViewController, UITableViewDataSource, UITabl
         title = "New Activity"
         
         // Set up tableView
-        tableView = UITableView(frame: view.frame, style: .Grouped)
+        tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.allowsSelection = false
@@ -51,22 +51,22 @@ class NewActivityViewController: UIViewController, UITableViewDataSource, UITabl
         
         // Register Nibs
         let nameNib = UINib(nibName: nameCellIdentifier, bundle: nil)
-        tableView.registerNib(nameNib, forCellReuseIdentifier: nameCellIdentifier)
+        tableView.register(nameNib, forCellReuseIdentifier: nameCellIdentifier)
         
         let requirementsNib = UINib(nibName: requirementsCellIdentifier, bundle: nil)
-        tableView.registerNib(requirementsNib, forCellReuseIdentifier: requirementsCellIdentifier)
+        tableView.register(requirementsNib, forCellReuseIdentifier: requirementsCellIdentifier)
         
         let goalNib = UINib(nibName: goalCellIdentifier, bundle: nil)
-        tableView.registerNib(goalNib, forCellReuseIdentifier: goalCellIdentifier)
+        tableView.register(goalNib, forCellReuseIdentifier: goalCellIdentifier)
         
         // Set up Bar Buttons
-        cancelBarButton = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(cancelButtonTapped(_:)))
+        cancelBarButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonTapped(_:)))
         navigationItem.leftBarButtonItem = cancelBarButton
         
-        saveBarButton = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: #selector(saveButtonTapped(_:)))
+        saveBarButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped(_:)))
         navigationItem.rightBarButtonItem = saveBarButton
         
-        doneBarButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(doneButtonTapped(_:)))
+        doneBarButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped(_:)))
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,11 +77,11 @@ class NewActivityViewController: UIViewController, UITableViewDataSource, UITabl
     
     // MARK: - UITableView Data Source
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
             return 2
         } else {
@@ -89,7 +89,7 @@ class NewActivityViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if (indexPath.section == 0) {
             
@@ -112,7 +112,7 @@ class NewActivityViewController: UIViewController, UITableViewDataSource, UITabl
         return 44
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if (section == 1) {
             return "Goal"
@@ -121,13 +121,13 @@ class NewActivityViewController: UIViewController, UITableViewDataSource, UITabl
         return nil
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if (indexPath.section == 0) {
             
             if (indexPath.row == 0) {
                 // Name Cell
-                let cell: NameTableViewCell = tableView.dequeueReusableCellWithIdentifier(nameCellIdentifier) as! NameTableViewCell
+                let cell: NameTableViewCell = tableView.dequeueReusableCell(withIdentifier: nameCellIdentifier) as! NameTableViewCell
                 cell.delegate = self
                 cell.nameTextField.becomeFirstResponder()
                 
@@ -137,7 +137,7 @@ class NewActivityViewController: UIViewController, UITableViewDataSource, UITabl
                 
             } else if (indexPath.row == 1) {
                 // Requirements Cell
-                let cell: RequirementsTableViewCell = tableView.dequeueReusableCellWithIdentifier(requirementsCellIdentifier) as! RequirementsTableViewCell
+                let cell: RequirementsTableViewCell = tableView.dequeueReusableCell(withIdentifier: requirementsCellIdentifier) as! RequirementsTableViewCell
                 cell.delegate = self
                 
                 requirementsCell = cell
@@ -149,7 +149,7 @@ class NewActivityViewController: UIViewController, UITableViewDataSource, UITabl
             
             if (indexPath.row == 0) {
                 // Goal Cell
-                let cell = tableView.dequeueReusableCellWithIdentifier(goalCellIdentifier) as! GoalTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: goalCellIdentifier) as! GoalTableViewCell
                 
                 goalCell = cell
                 
@@ -170,7 +170,7 @@ class NewActivityViewController: UIViewController, UITableViewDataSource, UITabl
     
     // MARK: - NameTableViewCell Delegate
     
-    func nameTableViewCell(nameTableViewCell nameTableViewCell: NameTableViewCell, textFieldValueDidChangeTo newValue: String) {
+    func nameTableViewCell(nameTableViewCell: NameTableViewCell, textFieldValueDidChangeTo newValue: String) {
         
         if (newValue == "") {
             title = "New Activity"
@@ -179,13 +179,13 @@ class NewActivityViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
     
-    func nameTableViewCellDidBeginEditing(nameTableViewCell nameTableViewCell: NameTableViewCell) {
+    func nameTableViewCellDidBeginEditing(nameTableViewCell: NameTableViewCell) {
         
         // Change save button to done button
         navigationItem.rightBarButtonItem = doneBarButton
     }
     
-    func nameTableViewCellDidReturn(nameTableViewCell nameTableViewCell: NameTableViewCell) {
+    func nameTableViewCellDidReturn(nameTableViewCell: NameTableViewCell) {
         
         // Change done button to save button
         navigationItem.rightBarButtonItem = saveBarButton
@@ -194,13 +194,13 @@ class NewActivityViewController: UIViewController, UITableViewDataSource, UITabl
     
     // MARK: - RequirementsTableViewCell Delegate
     
-    func requirementsTableViewCellDidBeginEditing(requirementsTableViewCell requirementsTableViewCell: RequirementsTableViewCell) {
+    func requirementsTableViewCellDidBeginEditing(requirementsTableViewCell: RequirementsTableViewCell) {
         
         // Change save button to done button
         navigationItem.rightBarButtonItem = doneBarButton
     }
     
-    func requirementsTableViewCellDidEndEditing(requirementsTableViewCell requirementsTableViewCell: RequirementsTableViewCell) {
+    func requirementsTableViewCellDidEndEditing(requirementsTableViewCell: RequirementsTableViewCell) {
         
         // Change done button to save button
         navigationItem.rightBarButtonItem = saveBarButton
@@ -209,11 +209,11 @@ class NewActivityViewController: UIViewController, UITableViewDataSource, UITabl
     
     // MARK: - Button Actions
 
-    func cancelButtonTapped(sender: UIBarButtonItem) {
-        dismissViewControllerAnimated(true, completion: nil)
+    func cancelButtonTapped(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
     }
     
-    func saveButtonTapped(sender: UIBarButtonItem) {
+    func saveButtonTapped(_ sender: UIBarButtonItem) {
         
         let newActivity = Activity(withname: nameCell!.nameTextField.text!, requirements: requirementsCell!.requirementsTextView.text, numberGoal: Int(goalCell!.goalStepper.value), numberCompleted: 0)
         
@@ -222,10 +222,10 @@ class NewActivityViewController: UIViewController, UITableViewDataSource, UITabl
         }
         
         // Dismiss View Controller
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
-    func doneButtonTapped(sender: UIBarButtonItem) {
+    func doneButtonTapped(_ sender: UIBarButtonItem) {
         
         // Dismiss keyboard
         view.endEditing(true)

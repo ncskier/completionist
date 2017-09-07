@@ -11,11 +11,11 @@ import UIKit
 
 protocol NameTableViewCellDelegate {
     
-    func nameTableViewCell(nameTableViewCell nameTableViewCell: NameTableViewCell, textFieldValueDidChangeTo newValue: String)
+    func nameTableViewCell(nameTableViewCell: NameTableViewCell, textFieldValueDidChangeTo newValue: String)
     
-    func nameTableViewCellDidBeginEditing(nameTableViewCell nameTableViewCell: NameTableViewCell)
+    func nameTableViewCellDidBeginEditing(nameTableViewCell: NameTableViewCell)
     
-    func nameTableViewCellDidReturn(nameTableViewCell nameTableViewCell: NameTableViewCell)
+    func nameTableViewCellDidReturn(nameTableViewCell: NameTableViewCell)
 }
 
 
@@ -34,14 +34,14 @@ class NameTableViewCell: UITableViewCell, UITextFieldDelegate {
         nameTextField.delegate = self
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
     
-    func loadCell(name name: String?, delegate: NameTableViewCellDelegate?) {
+    func loadCell(name: String?, delegate: NameTableViewCellDelegate?) {
         
         nameTextField.text = name
         self.delegate = delegate
@@ -50,13 +50,13 @@ class NameTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     // MARK: - IBActions
     
-    @IBAction func textFieldDidBeginEditing(sender: UITextField) {
+    @IBAction func textFieldDidBeginEditing(_ sender: UITextField) {
         if (delegate != nil) {
             delegate!.nameTableViewCellDidBeginEditing(nameTableViewCell: self)
         }
     }
     
-    @IBAction func textFieldValueChanged(sender: UITextField) {
+    @IBAction func textFieldValueChanged(_ sender: UITextField) {
         
         if (delegate != nil) {
             delegate?.nameTableViewCell(nameTableViewCell: self, textFieldValueDidChangeTo: sender.text!)
@@ -66,7 +66,7 @@ class NameTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     // MARK: - UITextField Delegate
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         nameTextField.resignFirstResponder()
         

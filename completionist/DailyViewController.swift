@@ -37,15 +37,15 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         // Set up track button
         let trackButtonHeight: CGFloat = 55.0
-        trackButton = UIButton(type: .Custom)
+        trackButton = UIButton(type: .custom)
         trackButton.frame = CGRect(x: 0.0, y: view.frame.height-trackButtonHeight, width: view.frame.width, height: trackButtonHeight)
-        trackButton.addTarget(self, action: #selector(trackButtonTapped(_:)), forControlEvents: .TouchUpInside)
-        trackButton.setTitle("Track", forState: .Normal)
+        trackButton.addTarget(self, action: #selector(trackButtonTapped(_:)), for: .touchUpInside)
+        trackButton.setTitle("Track", for: UIControlState())
         trackButton.backgroundColor = trackButton.tintColor
         view.addSubview(trackButton)
         
         // Set up tableView
-        tableView = UITableView(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: view.frame.height-trackButtonHeight), style: .Plain
+        tableView = UITableView(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: view.frame.height-trackButtonHeight), style: .plain
         )
         tableView.contentInset.top = 65.0
         tableView.dataSource = self
@@ -54,25 +54,25 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         // Register nib
         let activityCompletionNib = UINib(nibName: activityCompletionCellIdentifier, bundle: nil)
-        tableView.registerNib(activityCompletionNib, forCellReuseIdentifier: activityCompletionCellIdentifier)
+        tableView.register(activityCompletionNib, forCellReuseIdentifier: activityCompletionCellIdentifier)
         
         // Add Bar Buttons
-        addBarButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(addButtonTapped(_:)))
+        addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped(_:)))
         navigationItem.rightBarButtonItem = addBarButton
         
-        editBarButton = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(editButtonTapped(_:)))
+        editBarButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButtonTapped(_:)))
         navigationItem.leftBarButtonItem = editBarButton
         
-        doneBarButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(doneButtonTapped(_:)))
+        doneBarButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped(_:)))
         
         // Load Activies from CoreData
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
-        let fetchRequest = NSFetchRequest(entityName: "Activity")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity")
         
         do {
-            let results = try managedContext.executeFetchRequest(fetchRequest)
+            let results = try managedContext.fetch(fetchRequest)
             activityList = results as! [NSManagedObject]
             
         } catch let error as NSError {
@@ -81,8 +81,8 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         // Check Resetting Activities for new Week
         let todayDate = getNormalizedToday()
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let lastResetDate = defaults.valueForKey(lastResetDateIdentifier) as? NSDate
+        let defaults = UserDefaults.standard
+        let lastResetDate = defaults.value(forKey: lastResetDateIdentifier) as? Date
         
         if (lastResetDate == nil) {
             // Set today as last reset date
@@ -97,7 +97,7 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
         animateReloadCompletionCells()
     }
@@ -113,12 +113,12 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
         for i in 0..<activityList.count {
             // Important Vars
             let activity = activityList[i]
-            let indexPath = NSIndexPath(forItem: i, inSection: 0)
-            let cell: ActivityCompletionTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as! ActivityCompletionTableViewCell
+            let indexPath = IndexPath(item: i, section: 0)
+            let cell: ActivityCompletionTableViewCell = tableView.cellForRow(at: indexPath) as! ActivityCompletionTableViewCell
             
             // Load Completion Label
-            let numberCompleted = activity.valueForKey("numberCompleted") as! Int
-            let numberGoal = activity.valueForKey("numberGoal") as! Int
+            let numberCompleted = activity.value(forKey: "numberCompleted") as! Int
+            let numberGoal = activity.value(forKey: "numberGoal") as! Int
             cell.loadCompletionLabel(numberCompleted: numberCompleted, numberGoal: numberGoal)
             
             // Load Completion Bar
@@ -129,19 +129,19 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     
     // Week starts on Monday
-    func newWeekSince(lastDate: NSDate) -> Bool {
+    func newWeekSince(_ lastDate: Date) -> Bool {
         
-        let calendar = NSCalendar.currentCalendar()
+        let calendar = Calendar.current
         let normalizedToday = getNormalizedToday()
         
-        var todayWeekday = calendar.component(.Weekday, fromDate: normalizedToday) - 1
+        var todayWeekday = (calendar as NSCalendar).component(.weekday, from: normalizedToday) - 1
         // Start week at Monday
         if (todayWeekday == 0) {
             todayWeekday = 7
         }
         
-        let difference = calendar.components(.Day, fromDate: lastDate, toDate: normalizedToday, options: [])
-        let newWeekEquation = difference.day + (7 - todayWeekday)   // New Week if >= 7
+        let difference = (calendar as NSCalendar).components(.day, from: lastDate, to: normalizedToday, options: [])
+        let newWeekEquation = difference.day! + (7 - todayWeekday)   // New Week if >= 7
         
         if ( newWeekEquation >= 7) {
             return true
@@ -150,12 +150,12 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
         return false
     }
     
-    func getNormalizedToday() -> NSDate {
-        let today = NSDate()
-        let calendar = NSCalendar.currentCalendar()
+    func getNormalizedToday() -> Date {
+        let today = Date()
+        let calendar = Calendar.current
         
-        let components = calendar.components([.Day, .Month, .Year], fromDate: today)
-        let normalizedToday = calendar.dateFromComponents(components)
+        let components = (calendar as NSCalendar).components([.day, .month, .year], from: today)
+        let normalizedToday = calendar.date(from: components)
         
         return normalizedToday!
     }
@@ -174,23 +174,23 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     // MARK: - TableView Data Source
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return activityList.count
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 97
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Get Cell
-        let cell: ActivityCompletionTableViewCell = tableView.dequeueReusableCellWithIdentifier(activityCompletionCellIdentifier) as! ActivityCompletionTableViewCell
+        let cell: ActivityCompletionTableViewCell = tableView.dequeueReusableCell(withIdentifier: activityCompletionCellIdentifier) as! ActivityCompletionTableViewCell
         
         // Load Cell
         let activity = activityList[indexPath.row]
-        let name = activity.valueForKey("name") as! String
-        let numberCompleted = activity.valueForKey("numberCompleted") as! Int
-        let numberGoal = activity.valueForKey("numberGoal") as! Int
+        let name = activity.value(forKey: "name") as! String
+        let numberCompleted = activity.value(forKey: "numberCompleted") as! Int
+        let numberGoal = activity.value(forKey: "numberGoal") as! Int
         cell.loadCell(name: name, numberCompleted: numberCompleted, numberGoal: numberGoal, delegate: self)
         
         // Return Cell
@@ -200,21 +200,21 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     // MARK: - TableView Delegate
     
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return tableView.editing
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return tableView.isEditing
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
-        if (editingStyle == .Delete) {
+        if (editingStyle == .delete) {
             // Delete from CoreData
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let managedContext = appDelegate.managedObjectContext
             let managedObject = activityList[indexPath.row]
-            managedContext.deleteObject(managedObject)
+            managedContext.delete(managedObject)
             
             do {
-                activityList.removeAtIndex(indexPath.row)
+                activityList.remove(at: indexPath.row)
                 
                 try managedContext.save()
                 
@@ -235,9 +235,9 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func activityCompletionTableViewCellSelected(activityCompletionTableViewCell cell: ActivityCompletionTableViewCell) {
         
-        if (tableView.editing) {
+        if (tableView.isEditing) {
             
-            let index = tableView.indexPathForCell(cell)!.row
+            let index = tableView.indexPath(for: cell)!.row
             
             // Create ActivityDetailViewController
             let activityDetailViewController = ActivityDetailViewController()
@@ -249,7 +249,7 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
             
         } else {
             
-            cell.setSelected(!cell.selected, animated: false)
+            cell.setSelected(!cell.isSelected, animated: false)
             
         }
     }
@@ -261,11 +261,11 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
     func newActivityViewController(saveNewActivity newActivity: Activity) {
         
         // Save new activity
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
-        let activityEntity = NSEntityDescription.entityForName("Activity", inManagedObjectContext: managedContext)!
-        let managedObject = NSManagedObject(entity: activityEntity, insertIntoManagedObjectContext: managedContext)
+        let activityEntity = NSEntityDescription.entity(forEntityName: "Activity", in: managedContext)!
+        let managedObject = NSManagedObject(entity: activityEntity, insertInto: managedContext)
         
         managedObject.setValue(newActivity.name, forKey: "name")
         managedObject.setValue(newActivity.requirements, forKey: "requirements")
@@ -293,7 +293,7 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func activityDetailViewController(updateActivity activity: Activity, forManagedObject activityManagedObject: NSManagedObject) {
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
         activityManagedObject.setValue(activity.name, forKey: "name")
@@ -317,13 +317,13 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func activityDetailViewController(deleteActivityWithManagedObject managedObject: NSManagedObject, atIndex index: Int) {
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
-        managedContext.deleteObject(managedObject)
+        managedContext.delete(managedObject)
         
         do {
-            activityList.removeAtIndex(index)
+            activityList.remove(at: index)
             
             try managedContext.save()
             
@@ -341,7 +341,7 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     // MARK: - Button Actions
     
-    func addButtonTapped(sender: UIBarButtonItem) {
+    func addButtonTapped(_ sender: UIBarButtonItem) {
         
         // Display New Activity View Controller modally
         let newActivityViewController = NewActivityViewController()
@@ -351,10 +351,10 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
         let navigationController = UINavigationController(rootViewController: newActivityViewController)
         
         // Present View Controller
-        presentViewController(navigationController, animated: true, completion: nil)
+        present(navigationController, animated: true, completion: nil)
     }
     
-    func editButtonTapped(sender: UIBarButtonItem) {
+    func editButtonTapped(_ sender: UIBarButtonItem) {
         
         tableView.setEditing(true, animated: true)
         
@@ -367,7 +367,7 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
 //        }
     }
     
-    func doneButtonTapped(sender: UIBarButtonItem) {
+    func doneButtonTapped(_ sender: UIBarButtonItem) {
         
         tableView.setEditing(false, animated: true)
         
@@ -375,29 +375,29 @@ class DailyViewController: UIViewController, UITableViewDataSource, UITableViewD
         
     }
     
-    func trackButtonTapped(sender: UIButton) {
+    func trackButtonTapped(_ sender: UIButton) {
         
         // Update Activities for selected rows
-        var selectedRows = [NSIndexPath]()
+        var selectedRows = [IndexPath]()
         
         for i in 0..<activityList.count {
             
-            let indexPath = NSIndexPath(forItem: i, inSection: 0)
+            let indexPath = IndexPath(item: i, section: 0)
             
-            if (tableView.cellForRowAtIndexPath(indexPath)!.selected) {
+            if (tableView.cellForRow(at: indexPath)!.isSelected) {
                 selectedRows.append(indexPath)
             }
         }
         
         if (!selectedRows.isEmpty) {
             
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let managedContext = appDelegate.managedObjectContext
             
             for indexPath in selectedRows {
                 
                 let activityManagedObject = activityList[indexPath.row]
-                let numberCompleted = activityManagedObject.valueForKey("numberCompleted") as! Int
+                let numberCompleted = activityManagedObject.value(forKey: "numberCompleted") as! Int
                 activityManagedObject.setValue(numberCompleted + 1, forKey: "numberCompleted")
             }
             

@@ -11,9 +11,9 @@ import UIKit
 
 protocol RequirementsTableViewCellDelegate {
     
-    func requirementsTableViewCellDidBeginEditing(requirementsTableViewCell requirementsTableViewCell: RequirementsTableViewCell)
+    func requirementsTableViewCellDidBeginEditing(requirementsTableViewCell: RequirementsTableViewCell)
     
-    func requirementsTableViewCellDidEndEditing(requirementsTableViewCell requirementsTableViewCell: RequirementsTableViewCell)
+    func requirementsTableViewCellDidEndEditing(requirementsTableViewCell: RequirementsTableViewCell)
 }
 
 
@@ -36,40 +36,40 @@ class RequirementsTableViewCell: UITableViewCell, UITextViewDelegate {
         
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
     
-    func loadCell(requirements requirements: String, delegate: RequirementsTableViewCellDelegate?) {
+    func loadCell(requirements: String, delegate: RequirementsTableViewCellDelegate?) {
         
         requirementsTextView.text = requirements
         self.delegate = delegate
         
         if (requirements != "") {
-            placeholderLabel.hidden = true
+            placeholderLabel.isHidden = true
         }
     }
     
     
     // MARK: - TextView Delegate
     
-    func textViewDidBeginEditing(textView: UITextView) {
+    func textViewDidBeginEditing(_ textView: UITextView) {
         
         if (delegate != nil) {
             delegate!.requirementsTableViewCellDidBeginEditing(requirementsTableViewCell: self)
         }
         
-        placeholderLabel.hidden = true
+        placeholderLabel.isHidden = true
         
     }
     
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         
         if (textView.text == "") {
-            placeholderLabel.hidden = false
+            placeholderLabel.isHidden = false
         }
         
         if (delegate != nil) {

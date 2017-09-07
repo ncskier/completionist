@@ -42,7 +42,7 @@ class ActivityDetailViewController: UIViewController, UITableViewDataSource, UIT
         // Do any additional setup after loading the view.
         
         // Set up Table View
-        tableView = UITableView(frame: view.frame, style: .Grouped)
+        tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.allowsSelection = false
@@ -50,25 +50,25 @@ class ActivityDetailViewController: UIViewController, UITableViewDataSource, UIT
         
         // Register Nibs
         let nameNib = UINib(nibName: nameCellIdentifier, bundle: nil)
-        tableView.registerNib(nameNib, forCellReuseIdentifier: nameCellIdentifier)
+        tableView.register(nameNib, forCellReuseIdentifier: nameCellIdentifier)
         
         let requirementsNib = UINib(nibName: requirementsCellIdentifier, bundle: nil)
-        tableView.registerNib(requirementsNib, forCellReuseIdentifier: requirementsCellIdentifier)
+        tableView.register(requirementsNib, forCellReuseIdentifier: requirementsCellIdentifier)
         
         let goalNib = UINib(nibName: goalCellIdentifier, bundle: nil)
-        tableView.registerNib(goalNib, forCellReuseIdentifier: goalCellIdentifier)
+        tableView.register(goalNib, forCellReuseIdentifier: goalCellIdentifier)
         
         let completedToGoalNib = UINib(nibName: completedToGoalCellIdentifier, bundle: nil)
-        tableView.registerNib(completedToGoalNib, forCellReuseIdentifier: completedToGoalCellIdentifier)
+        tableView.register(completedToGoalNib, forCellReuseIdentifier: completedToGoalCellIdentifier)
         
         let deleteNib = UINib(nibName: deleteCellIdentifier, bundle: nil)
-        tableView.registerNib(deleteNib, forCellReuseIdentifier: deleteCellIdentifier)
+        tableView.register(deleteNib, forCellReuseIdentifier: deleteCellIdentifier)
         
         // Set Title to name
-        title = activityManagedObject.valueForKey("name") as? String
+        title = activityManagedObject.value(forKey: "name") as? String
         
         // Create done bar button
-        doneBarButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(doneButtonTapped(_:)))
+        doneBarButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped(_:)))
     }
 
     override func didReceiveMemoryWarning() {
@@ -79,11 +79,11 @@ class ActivityDetailViewController: UIViewController, UITableViewDataSource, UIT
     
     // MARK: - UITableView Data Source
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if (section == 0) {
             return 2
@@ -92,7 +92,7 @@ class ActivityDetailViewController: UIViewController, UITableViewDataSource, UIT
         }
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if (indexPath.section == 0) {
             
@@ -121,7 +121,7 @@ class ActivityDetailViewController: UIViewController, UITableViewDataSource, UIT
         return 44
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if (section == 1) {
             return "Goal"
@@ -130,14 +130,14 @@ class ActivityDetailViewController: UIViewController, UITableViewDataSource, UIT
         return nil
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if (indexPath.section == 0) {
             
             if (indexPath.row == 0) {
                 // Name Cell
-                let cell: NameTableViewCell = tableView.dequeueReusableCellWithIdentifier(nameCellIdentifier) as! NameTableViewCell
-                cell.loadCell(name: activityManagedObject.valueForKey("name") as? String, delegate: self)
+                let cell: NameTableViewCell = tableView.dequeueReusableCell(withIdentifier: nameCellIdentifier) as! NameTableViewCell
+                cell.loadCell(name: activityManagedObject.value(forKey: "name") as? String, delegate: self)
                 
                 nameCell = cell
                 
@@ -145,8 +145,8 @@ class ActivityDetailViewController: UIViewController, UITableViewDataSource, UIT
                 
             } else if (indexPath.row == 1) {
                 // Requirements Cell
-                let cell: RequirementsTableViewCell = tableView.dequeueReusableCellWithIdentifier(requirementsCellIdentifier) as! RequirementsTableViewCell
-                cell.loadCell(requirements: activityManagedObject.valueForKey("requirements") as! String, delegate: self)
+                let cell: RequirementsTableViewCell = tableView.dequeueReusableCell(withIdentifier: requirementsCellIdentifier) as! RequirementsTableViewCell
+                cell.loadCell(requirements: activityManagedObject.value(forKey: "requirements") as! String, delegate: self)
                 
                 requirementsCell = cell
                 
@@ -157,8 +157,8 @@ class ActivityDetailViewController: UIViewController, UITableViewDataSource, UIT
             
             if (indexPath.row == 0) {
                 // CompletedToGoal Cell
-                let cell = tableView.dequeueReusableCellWithIdentifier(completedToGoalCellIdentifier) as! CompletedToGoalTableViewCell
-                cell.loadCell(numberCompleted: activityManagedObject.valueForKey("numberCompleted") as! Int, numberGoal: activityManagedObject.valueForKey("numberGoal") as! Int)
+                let cell = tableView.dequeueReusableCell(withIdentifier: completedToGoalCellIdentifier) as! CompletedToGoalTableViewCell
+                cell.loadCell(numberCompleted: activityManagedObject.value(forKey: "numberCompleted") as! Int, numberGoal: activityManagedObject.value(forKey: "numberGoal") as! Int)
                 
                 completedToGoalCell = cell
                 
@@ -169,7 +169,7 @@ class ActivityDetailViewController: UIViewController, UITableViewDataSource, UIT
             
             if (indexPath.row == 0) {
                 // Delete Cell
-                let cell = tableView.dequeueReusableCellWithIdentifier(deleteCellIdentifier) as! DeleteTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: deleteCellIdentifier) as! DeleteTableViewCell
                 cell.delegate = self
                 
                 deleteCell = cell
@@ -191,19 +191,19 @@ class ActivityDetailViewController: UIViewController, UITableViewDataSource, UIT
     
     // MARK: - NameTableViewCell Delegate
     
-    func nameTableViewCell(nameTableViewCell nameTableViewCell: NameTableViewCell, textFieldValueDidChangeTo newValue: String) {
+    func nameTableViewCell(nameTableViewCell: NameTableViewCell, textFieldValueDidChangeTo newValue: String) {
         
         // Set title to new name
         title = newValue
     }
     
-    func nameTableViewCellDidBeginEditing(nameTableViewCell nameTableViewCell: NameTableViewCell) {
+    func nameTableViewCellDidBeginEditing(nameTableViewCell: NameTableViewCell) {
         
         // Show doneBarButton
         navigationItem.rightBarButtonItem = doneBarButton
     }
     
-    func nameTableViewCellDidReturn(nameTableViewCell nameTableViewCell: NameTableViewCell) {
+    func nameTableViewCellDidReturn(nameTableViewCell: NameTableViewCell) {
         
         // Remove done button
         navigationItem.rightBarButtonItem = nil
@@ -211,13 +211,13 @@ class ActivityDetailViewController: UIViewController, UITableViewDataSource, UIT
     
     // MARK: - RequirementsTableViewCell Delegate
     
-    func requirementsTableViewCellDidBeginEditing(requirementsTableViewCell requirementsTableViewCell: RequirementsTableViewCell) {
+    func requirementsTableViewCellDidBeginEditing(requirementsTableViewCell: RequirementsTableViewCell) {
         
         // Show doneBarButton
         navigationItem.rightBarButtonItem = doneBarButton
     }
     
-    func requirementsTableViewCellDidEndEditing(requirementsTableViewCell requirementsTableViewCell: RequirementsTableViewCell) {
+    func requirementsTableViewCellDidEndEditing(requirementsTableViewCell: RequirementsTableViewCell) {
         
         // Remove done bar button
         navigationItem.rightBarButtonItem = nil
@@ -226,31 +226,31 @@ class ActivityDetailViewController: UIViewController, UITableViewDataSource, UIT
     
     // MARK: - DeleteTableViewCell Delegate
     
-    func deleteTableViewCellTapped(deleteTableViewCell deleteTableViewCell: DeleteTableViewCell) {
+    func deleteTableViewCellTapped(deleteTableViewCell: DeleteTableViewCell) {
         
         // Create alertView to confirm deletion
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let deleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: {(action: UIAlertAction) -> Void in
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: {(action: UIAlertAction) -> Void in
             if (self.delegate != nil) {
                 self.delegate!.activityDetailViewController(deleteActivityWithManagedObject: self.activityManagedObject, atIndex: self.activityIndex!)
                 self.deleteActivity = true
-                self.navigationController?.popToRootViewControllerAnimated(true)
+                self.navigationController?.popToRootViewController(animated: true)
             }
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
         alertController.addAction(deleteAction)
         alertController.addAction(cancelAction)
         
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     
     // MARK: - Button Actions
     
-    func doneButtonTapped(sender: UIBarButtonItem) {
+    func doneButtonTapped(_ sender: UIBarButtonItem) {
         
         // Hide Keyboard
         view.endEditing(true)
@@ -270,7 +270,7 @@ class ActivityDetailViewController: UIViewController, UITableViewDataSource, UIT
     }
     */
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         
         if (!deleteActivity) {
             // Update and Save Managed Object

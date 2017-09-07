@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ActivityCheckboxTableViewCellDelegate {
-    func activityCheckboxTableViewCellSelectedForDetailEdit(activityCheckboxTableViewCell: ActivityCheckboxTableViewCell)
+    func activityCheckboxTableViewCellSelectedForDetailEdit(_ activityCheckboxTableViewCell: ActivityCheckboxTableViewCell)
 }
 
 class ActivityCheckboxTableViewCell: UITableViewCell {
@@ -38,33 +38,33 @@ class ActivityCheckboxTableViewCell: UITableViewCell {
         self.selectedBackgroundView = selectedBackgroundView
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
     }
     
-    func loadCell(name name: String, requirements: String, numberCompleted: Int, numberGoal: Int, delegate: ActivityCheckboxTableViewCellDelegate?) {
+    func loadCell(name: String, requirements: String, numberCompleted: Int, numberGoal: Int, delegate: ActivityCheckboxTableViewCellDelegate?) {
         nameLabel.text = name
         requirementsTextView.text = requirements
         goalLabel.text = "\(numberCompleted)/\(numberGoal)"
         self.delegate = delegate
         
         // Select checkbox is cell selected
-        checkboxButton.selected = selected
+        checkboxButton.isSelected = isSelected
         
         // Turn goalText green if complete
         if (numberCompleted >= numberGoal) {
             goalLabel.textColor = UIColor(red: 0.041, green: 0.920, blue: 0.000, alpha: 1.00)
         } else {
-            goalLabel.textColor = UIColor.blackColor()
+            goalLabel.textColor = UIColor.black
         }
     }
     
     func deselectCell() {
         // Uncheck box and set selected to false
         setSelected(false, animated: false)
-        checkboxButton.selected = false
+        checkboxButton.isSelected = false
     }
     
     // MARK: - IBActions
@@ -76,21 +76,21 @@ class ActivityCheckboxTableViewCell: UITableViewCell {
 //        
 //    }
     
-    @IBAction func cellSelectButtonTapped(sender: UIButton) {
+    @IBAction func cellSelectButtonTapped(_ sender: UIButton) {
         
-        if (editing) {
+        if (isEditing) {
             // Edit Cell
             if (delegate != nil) {
                 // Select Cell for edit
-                setSelected(!selected, animated: false)
+                setSelected(!isSelected, animated: false)
                 selectedBackgroundView?.backgroundColor = grayBackgroundColor
                 delegate!.activityCheckboxTableViewCellSelectedForDetailEdit(self)
             }
         } else {
             // Select Cell
             selectedBackgroundView?.backgroundColor = greenBackgroundColor
-            checkboxButton.selected = !checkboxButton.selected
-            setSelected(!selected, animated: false)
+            checkboxButton.isSelected = !checkboxButton.isSelected
+            setSelected(!isSelected, animated: false)
         }
         
     }

@@ -22,32 +22,32 @@ class ActivityCompletionBarView: UIView {
         // Outline
         layer.borderWidth = 0.3
         layer.cornerRadius = cornerRadius
-        layer.borderColor = UIColor.grayColor().CGColor
+        layer.borderColor = UIColor.gray.cgColor
         
         // Background
         backgroundColor = UIColor(red: 0.900, green: 0.900, blue: 0.900, alpha: 1.000)
-        backgroundColor = UIColor.whiteColor()
+        backgroundColor = UIColor.white
 //        backgroundColor = UIColor(red: 0.980, green: 0.980, blue: 0.980, alpha: 1.000)
 //        backgroundColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1.0)
         
         // Completion Label
-        completionLabel.textAlignment = .Right
+        completionLabel.textAlignment = .right
         addSubview(completionLabel)
         
         // Completion View
         completionView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 0.0, height: frame.height))
         completionView.backgroundColor = UIColor(red: 0.041, green: 0.920, blue: 0.000, alpha: 1.000)
-        completionView.backgroundColor = UIColor.clearColor()
+        completionView.backgroundColor = UIColor.clear
         addSubview(completionView)
         
         
         // Gradient
 //        gradientLayer.cornerRadius = 5.5
         updateGradientLayer()
-        let color1 = UIColor(red: 0.035, green: 0.781, blue: 0.004, alpha: 1.000).CGColor as CGColorRef
+        let color1 = UIColor(red: 0.035, green: 0.781, blue: 0.004, alpha: 1.000).cgColor as CGColor
 //        let color1 = UIColor(red: 0.036, green: 0.799, blue: 0.004, alpha: 1.000).CGColor as CGColorRef
 //        let color1 = UIColor(red: 0.037, green: 0.827, blue: 0.004, alpha: 1.000).CGColor as CGColorRef
-        let color2 = UIColor(red: 0.041, green: 0.920, blue: 0.000, alpha: 1.000).CGColor as CGColorRef
+        let color2 = UIColor(red: 0.041, green: 0.920, blue: 0.000, alpha: 1.000).cgColor as CGColor
         gradientLayer.colors = [color1, color2]
         gradientLayer.locations = [0.0, 0.9]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
@@ -56,7 +56,7 @@ class ActivityCompletionBarView: UIView {
     }
     
     
-    func setCompletionLabelText(text: String) {
+    func setCompletionLabelText(_ text: String) {
         completionLabel.text = text
         
         // For some reason, self view width is wonky during setupView()
@@ -66,7 +66,7 @@ class ActivityCompletionBarView: UIView {
             y: 0.0,
             width: frame.width-completionLabelRightOffset,
             height: frame.height)
-        completionLabel.textColor = UIColor.lightGrayColor()
+        completionLabel.textColor = UIColor.lightGray
     }
     
     
@@ -97,14 +97,14 @@ class ActivityCompletionBarView: UIView {
     }
     
     
-    func setProgress(progress: Float, animated: Bool) {
+    func setProgress(_ progress: Float, animated: Bool) {
         
         // Set variable
         self.progress = progress
         
         // Update Completion View
         if (animated) {
-            UIView.animateWithDuration(0.9, animations: {
+            UIView.animate(withDuration: 0.9, animations: {
                 
                 self.updateCompletionView()
                 
@@ -126,12 +126,12 @@ class ActivityCompletionBarView: UIView {
     
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         // Drawing code
         
         // Draw White Background
         let backgroundPath = UIBezierPath(rect: rect)
-        UIColor.whiteColor().setFill()
+        UIColor.white.setFill()
         backgroundPath.fill()
         
         let grayTone: CGFloat = 0.985
@@ -154,8 +154,8 @@ class ActivityCompletionBarView: UIView {
         
         while(slantOrigin.x < rect.width) {
             
-            path.moveToPoint(slantOrigin)
-            path.addLineToPoint( CGPoint(x: slantOrigin.x + slantLength, y: slantOrigin.y - slantLength) )
+            path.move(to: slantOrigin)
+            path.addLine( to: CGPoint(x: slantOrigin.x + slantLength, y: slantOrigin.y - slantLength) )
             
             // Update origin
             slantOrigin = CGPoint(x: slantOrigin.x + xOffset, y: slantOrigin.y)
